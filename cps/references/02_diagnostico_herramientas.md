@@ -112,7 +112,11 @@ Para problemas con múltiples actores, mapear su posición:
 ## Técnica del Reductor de Complejidad (Recuenco/Nardone)
 
 Esta es la herramienta de diagnóstico central del proceso CPS. Combina la rigurosidad de Kepner-Tregoe
-con la perspectiva sistémica de Nardone:
+con la perspectiva sistémica de Nardone. Se aplica en dos pasos: primero las 6 preguntas de
+caracterización (Paso 1.1) y, a continuación y por separado, las Soluciones Intentadas Redundantes
+(Paso 1.2). Esta es la misma estructura del Paso 1.1 / 1.2 de la Fase 1 en `SKILL.md`.
+
+### Paso 1.1 — Las 6 preguntas de caracterización
 
 1. **¿En QUÉ consiste el problema?** — Solo comportamientos observables, no interpretaciones.
    MAL: "El equipo no está motivado." BIEN: "3 de 5 entregas se han retrasado más de 2 semanas."
@@ -128,5 +132,8 @@ con la perspectiva sistémica de Nardone:
 6. **¿Cómo lo ven los demás?** — Perspectivas divergentes. Lo que para unos es un problema, para otros
    puede ser una solución (o algo invisible).
 
-7. **¿Qué se ha intentado hacer?** — Soluciones Intentadas Redundantes (Nardone). Esta pregunta es
-   CRUCIAL porque el patrón de intentos fallidos revela la estructura del problema.
+### Paso 1.2 — Soluciones Intentadas Redundantes (Nardone)
+
+Paso separado y CRUCIAL: **¿Qué se ha intentado hacer hasta ahora para resolver el problema?**
+El patrón de intentos fallidos revela la estructura del problema. Si todos los intentos van en la
+misma dirección y fracasan ("más de lo mismo"), la solución real probablemente esté en otra dirección.

@@ -12,9 +12,12 @@ Cuando se activa, guía a Claude a través de un proceso riguroso de resolución
 |-------|-------|---------|------------|
 | **Rápido** | 0-2 | Chat | Diagnósticos rápidos, primeras impresiones |
 | **Estándar** | 0-5 | Chat o documento breve | Análisis de situación, preparación de decisiones |
-| **Completo** | 0-7 | Documento entregable | Proyectos estratégicos, transformaciones |
+| **Completo** | 0-7 | Documento Markdown | Proyectos estratégicos, transformaciones |
 
-## Las 7 fases
+## Fase 0 + las 7 fases
+
+La Fase 0 es una clasificación previa que determina qué metodología aplicar; sobre ella se despliegan
+las 7 fases del proceso CPS (1 a 7).
 
 | Fase | Nombre | Herramientas principales |
 |------|--------|------------------------|
@@ -49,8 +52,8 @@ Cuando se activa, guía a Claude a través de un proceso riguroso de resolución
 ## Estructura
 
 ```
-complex-problem-solving/
-├── SKILL.md                              # Instrucciones principales (407 líneas)
+cps/
+├── SKILL.md                              # Instrucciones principales
 └── references/
     ├── 01_clasificacion_cynefin.md       # Framework Cynefin
     ├── 02_diagnostico_herramientas.md    # CATWOE, IS/IS NOT, Kipling, Stakeholders
@@ -60,25 +63,62 @@ complex-problem-solving/
     ├── 06_evaluacion_estrategica.md      # Rumelt Kernel, Tests de evaluación
     ├── 07_comunicacion_consenso.md       # Storytelling, Resistencias, Consenso
     ├── 08_metodologia_8d.md              # Metodología 8D completa
-    └── 09_jtbd_wardley.md                # Jobs to Be Done + Wardley Mapping
+    ├── 09_jtbd_wardley.md                # Jobs to Be Done + Wardley Mapping
+    ├── 10_equipos_y_generalistas.md      # Team of Teams (McChrystal) + Range (Epstein)
+    └── 11_ejemplo_aplicado.md            # Ejemplo completo de análisis CPS (Nivel 2)
 ```
 
 ## Instalación
 
+### Claude Code
+
+Copia la carpeta `cps/` a tu directorio de skills:
+
+```bash
+cp -r cps/ ~/.claude/skills/
+```
+
+La skill se invoca **únicamente** de forma explícita escribiendo `/cps` (no se activa
+automáticamente).
+
+### Empaquetar la skill (`.skill`) para Cowork
+
+El paquete `.skill` no se versiona en el repositorio; se genera bajo demanda a partir de la carpeta
+`cps/`. Es simplemente un zip de esa carpeta con la extensión `.skill`:
+
+**macOS / Linux (bash):**
+
+```bash
+zip -r complex-problem-solving.skill cps/
+```
+
+**Windows (PowerShell):**
+
+> Nota: `Compress-Archive` en Windows PowerShell 5.1 guarda las rutas internas con `\`, lo que algunos
+> importadores (incluido Cowork) pueden rechazar. Este script genera el zip con rutas `/` correctas:
+
+```powershell
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+$src = (Resolve-Path .\cps).Path
+$out = (Join-Path (Get-Location) 'complex-problem-solving.skill')
+if (Test-Path $out) { Remove-Item $out -Force }
+$zip = [System.IO.Compression.ZipFile]::Open($out, 'Create')
+foreach ($f in Get-ChildItem $src -Recurse -File) {
+    $entry = 'cps/' + $f.FullName.Substring($src.Length + 1).Replace('\','/')
+    [void][System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $f.FullName, $entry)
+}
+$zip.Dispose()
+```
+
+El zip debe contener la carpeta `cps/` en su raíz con rutas tipo `cps/SKILL.md`, `cps/references/*.md`
+(separador `/`, no `\`).
+
 ### Cowork (Claude Desktop)
 
-1. Descarga el archivo [`complex-problem-solving.skill`](complex-problem-solving.skill) de este repositorio
+1. Genera el archivo `complex-problem-solving.skill` con los comandos de la sección anterior
 2. Arrastra el archivo a una conversación de Cowork, o bien ábrelo desde el Finder
 3. Aparecerá un botón **"Copy to your skills"** — púlsalo para instalar
 4. La skill estará disponible en todas tus sesiones futuras de Cowork
-
-### Claude Code
-
-Copia la carpeta `complex-problem-solving/` a tu directorio de skills:
-
-```bash
-cp -r complex-problem-solving/ ~/.claude/skills/
-```
 
 ## Idiomas
 

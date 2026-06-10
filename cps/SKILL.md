@@ -1,12 +1,9 @@
 ---
-name: complex-problem-solving
+name: cps
 description: >
-  Complex Problem Solving (CPS) methodology integrating Nardone, Cynefin, Rumelt, Meadows, Kahneman, De Bono, Wardley Mapping and JTBD.
-  Use this skill ALWAYS when the user asks to: analyze a complex problem, diagnose a situation, design a strategy, evaluate alternatives,
-  solve a business or technology challenge, kick off a complex project, analyze organizational transformation, or any task involving
-  uncertainty, multiple root causes, conflicting stakeholders, or ambiguous information. Also trigger on: "CPS", "problem solving",
-  "root cause", "diagnóstico", "análisis de situación", "qué está fallando", "por qué no funciona", "evaluar opciones",
-  "tomar una decisión difícil", "cómo resolver". Works in Spanish and English.
+  Metodología de Resolución de Problemas Complejos (CPS) que integra Nardone, Cynefin, Rumelt, Meadows,
+  Kahneman, De Bono, Wardley Mapping y JTBD. Se invoca únicamente de forma explícita con /cps.
+disable-model-invocation: true
 ---
 
 # Complex Problem Solving (CPS)
@@ -39,15 +36,18 @@ Formato: Respuesta estructurada en el chat o documento breve según prefiera el 
 Ideal para: Análisis de situación, preparación de decisiones, arranque de proyectos.
 
 **Nivel 3 — Análisis Completo** (~30-60 min de lectura)
-Cubre: Las 7 fases completas con herramientas detalladas + documento entregable.
-Formato: Documento (.docx o .md) con análisis completo.
+Cubre: La Fase 0 (clasificación previa) + las 7 fases completas con herramientas detalladas + documento entregable.
+Formato: Documento Markdown (.md) con análisis completo.
 Ideal para: Proyectos estratégicos, transformaciones, problemas persistentes que resisten soluciones convencionales.
 
 Tras elegir el nivel, confirmar el idioma (español/inglés) si no es evidente por contexto.
 
 ---
 
-## Las 7 Fases del CPS
+## Fase 0 (clasificación previa) + las 7 fases del CPS
+
+La Fase 0 es una clasificación previa que determina qué metodología aplicar; sobre ella se despliegan
+las 7 fases del proceso CPS (1 a 7).
 
 ### FASE 0 — Clasificación del Problema
 
@@ -297,11 +297,12 @@ Según el tipo de problema, aplicar:
 - **Metodología 8D** para problemas técnicos estructurados en dominio Complicado — requiere
   causa raíz verificable y plan formal con trazabilidad (ver `references/08_metodologia_8d.md`).
   No usar en dominio Complejo donde se necesita experimentación.
-- **Team of Teams (McChrystal)** para implementación en entornos complejos: construir conciencia
-  compartida (toda la información relevante fluye a todos los niveles), habilitar ejecución
-  empoderada (las decisiones las toma quien tiene la mejor información, no quien tiene más rango),
-  y crear equipos adaptativos con personas en T (profundidad en su especialidad + amplitud
-  para colaborar transversalmente)
+- **Team of Teams (McChrystal) + Range (Epstein)** para implementación en entornos complejos:
+  construir conciencia compartida (toda la información relevante fluye a todos los niveles),
+  habilitar ejecución empoderada (las decisiones las toma quien tiene la mejor información, no quien
+  tiene más rango), y crear equipos adaptativos con personas en T (profundidad en su especialidad +
+  amplitud para colaborar transversalmente) y generalistas que ven lo que los especialistas no
+  (ver `references/10_equipos_y_generalistas.md`)
 - **Comunicación y Storytelling (Damas)** para gestión del cambio: narrativa, manejo de resistencias,
   técnicas de consenso (ver `references/07_comunicacion_consenso.md`)
 - **Empatía Táctica (Voss)** para gestionar stakeholders difíciles: preguntas calibradas,
@@ -347,6 +348,28 @@ En el dominio complejo: Probar → Percibir → Responder.
 ## Recomendación inicial: [dirección a seguir + próximos pasos]
 ```
 
+**Ejemplo aplicado (Nivel 1):**
+
+> *Problema planteado: "Nuestro equipo de soporte está saturado y los tiempos de respuesta no dejan de subir."*
+>
+> **Clasificación:** Complejo. No hay una causa-efecto evidente; el sistema (clientes, agentes,
+> producto) es adaptativo y los intentos previos no han funcionado de forma estable.
+>
+> **Diagnóstico:** Los tiempos de respuesta han pasado de 4h a 18h en 3 meses. Soluciones intentadas:
+> (1) contratar a 2 agentes — alivio temporal, luego peor; (2) pedir "más esfuerzo" — sin efecto.
+> El patrón "más de lo mismo" (añadir capacidad) sugiere que el problema no es de capacidad.
+>
+> **Causas principales:** (1) Los tickets repetidos por un bug conocido del producto generan ~40%
+> del volumen; (2) no hay base de conocimiento, así que cada agente reinvestiga; (3) el incentivo
+> premia cerrar rápido, no resolver de raíz → reaperturas.
+>
+> **Recomendación inicial:** Atacar el origen, no la capacidad. Priorizar el fix del bug que genera
+> el 40% del volumen y montar una base de conocimiento mínima esta semana. Medir reaperturas, no solo
+> velocidad de cierre. Próximo paso (72h): cuantificar el volumen por causa antes de tocar plantilla.
+
+Para un ejemplo completo de Nivel 2 (las fases desarrolladas paso a paso), ver
+`references/11_ejemplo_aplicado.md`.
+
 ### Nivel 2 (Estándar) — en chat o documento breve
 
 ```
@@ -361,10 +384,10 @@ En el dominio complejo: Probar → Percibir → Responder.
 ## Próximos pasos
 ```
 
-### Nivel 3 (Completo) — documento
+### Nivel 3 (Completo) — documento Markdown (.md)
 
-Documento completo con las 7 fases, herramientas detalladas, diagramas donde aporten valor,
-plan de implementación con responsables y fechas, y mecanismos de monitorización.
+Documento Markdown completo con la Fase 0 y las 7 fases, herramientas detalladas, diagramas donde
+aporten valor, plan de implementación con responsables y fechas, y mecanismos de monitorización.
 
 ---
 
@@ -399,3 +422,5 @@ No leerlos todos al inicio — eso sería ineficiente y cargaría contexto innec
 | `references/07_comunicacion_consenso.md` | Fase 6, para gestión del cambio y stakeholders |
 | `references/08_metodologia_8d.md` | Fase 6, para implementación estructurada tipo 8D |
 | `references/09_jtbd_wardley.md` | Fases 1, 2, 4, 5 — cuando el problema tenga componente de producto/mercado o tecnología |
+| `references/10_equipos_y_generalistas.md` | Fase 6, para diseño de equipos, ejecución en entornos complejos (Team of Teams) y el valor de los generalistas (Range) |
+| `references/11_ejemplo_aplicado.md` | Cualquier fase, como ejemplo de un análisis CPS completo de Nivel 2 desarrollado paso a paso |
